@@ -4,7 +4,6 @@
 #include <signal.h>
 
 
-// ONLY WORKS ON LINUX
 static void sigint_handler(int sig) {
     printf("\n");
 }
