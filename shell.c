@@ -2,12 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include "signal.c"
 #include "input.c"
 
 #define MAX_USERNAME 256
 #define HOSTNAME "x_shell"
 
 int main() {
+    if (signal_handler() != 0) {
+        perror("Error setting up signal handler");
+        exit(1);
+    }
+
     char *user_name = getenv("USER");
     if (user_name == NULL) {
         perror("Error getting username");

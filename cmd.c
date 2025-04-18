@@ -16,8 +16,16 @@ int cmd(char *command, char *args[], const char *HOSTNAME) {
     }
 
     if (strcmp(command, "cd") == 0) {
-        // If no argument is provided (args[1] is NULL), change to home directory
-        const char *dir = args[1] ? args[1] : getenv("HOME");
+        char *dir;
+        if (args[1] && strcmp(args[1], "~") == 0) {
+            dir = getenv("HOME");
+        } else {
+            if (args[1]) {
+                dir = args[1];
+            } else {
+                dir = getenv("HOME");
+            }
+        }
         if (!dir) {
             fprintf(stderr, "cd: HOME not set\n");
             return -1;
