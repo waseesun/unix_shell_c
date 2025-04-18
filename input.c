@@ -8,8 +8,13 @@
 
 int shell_input(char *input, const char *HOSTNAME) {
     if (fgets(input, MAX_INPUT, stdin) == NULL) {
+        if (feof(stdin)) {
+            printf("\n");
+            return 1; 
+        }
         perror("Error reading input");
-        exit(1);
+        clearerr(stdin); 
+        return -1; 
     }
 
     input[strcspn(input, "\n")] = '\0';

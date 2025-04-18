@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <string.h>
+#include "redirect.c"
 
 int cmd(char *command, char *args[], const char *HOSTNAME) {
     if (strcmp(command, "hostname") == 0) {
@@ -42,6 +43,20 @@ int cmd(char *command, char *args[], const char *HOSTNAME) {
         perror("Fork failed");
         return -1;
     } else if (pid == 0) {
+        int redirect_result;
+        redirect_result = input_redirect(args);
+        if (redirect_result < 0) {
+            return -1;
+        }
+        redirect_result = output_redirect(args, 0);
+        if (redirect_result < 0) {
+            return -1;
+        }
+        redirect_result = output_redirect(args, 1);
+        if (redirect_result < 0) {
+            return -1;
+        }
+        
         execvp(command, args);
         perror("Command execution failed");
         exit(1);
