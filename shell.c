@@ -5,20 +5,16 @@
 #include "input.c"
 
 #define MAX_USERNAME 256
-#define HOSTNAME "x_shell>"
+#define HOSTNAME "x_shell"
 
 int main() {
-    char user_name[MAX_USERNAME];
-
-    printf("Enter your username: ");
-    if (fgets(user_name, MAX_USERNAME, stdin) == NULL) {
-        perror("Error reading username");
+    char *user_name = getenv("USER");
+    if (user_name == NULL) {
+        perror("Error getting username");
         exit(1);
     }
 
-    user_name[strcspn(user_name, "\n")] = '\0';
-
-    char *shell_name = malloc(strlen(user_name) + strlen(HOSTNAME) + 2);
+    char *shell_name = malloc(strlen(user_name) + strlen(HOSTNAME) + 3);
     if (shell_name == NULL) {
         perror("Error allocating memory");
         exit(1);
@@ -27,7 +23,7 @@ int main() {
     strcpy(shell_name, user_name);
     strcat(shell_name, "@");
     strcat(shell_name, HOSTNAME);
-    strcat(shell_name, " ");
+    strcat(shell_name, "> ");
 
     while (true) {
         char *input = malloc(1024 * sizeof(char));
@@ -39,20 +35,17 @@ int main() {
         printf("%s", shell_name);
         fflush(stdout);
         
-        int result = shell_input(input);
+        int result = shell_input(input, HOSTNAME);
 
-        if (result == 0) {
-            free(input);
+        free(input);
+
+        if (result == 1) {
+            break;
+        } else if (result != 0) {
             continue;
         }
-        
-        if (result != 0) {
-            free(input);
-            exit(1);
-        }
-
-        printf("Command: %s\n", input);
     }
 
+    free(shell_name);
     return 0;
 }
