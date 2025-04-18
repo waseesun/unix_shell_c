@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "signal.c"
-#include "input.c"
+#include "c_signal.h"
+#include "input.h"
 
 #define MAX_USERNAME 256
 #define HOSTNAME "x_shell"

@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "cmd.c"
+#include "multiple_cmd.h"
 
 #define MAX_INPUT 1024
-#define MAX_TOKENS 64
 
 int shell_input(char *input, const char *HOSTNAME) {
     if (fgets(input, MAX_INPUT, stdin) == NULL) {
@@ -23,22 +22,7 @@ int shell_input(char *input, const char *HOSTNAME) {
         return 0;
     }
 
-    char *tokens[MAX_TOKENS];
-    int count_token = 0;
-    char *token = strtok(input, " \t");
-    
-    while (token != NULL && count_token < MAX_TOKENS - 1) {
-        tokens[count_token] = token;
-        count_token++;
-        token = strtok(NULL, " \t");
-    }
-
-    tokens[count_token] = NULL;
-    if (count_token == 0) {
-        return 0;
-    }
-
-    int result = cmd(tokens[0], tokens, HOSTNAME);
+    int result = multiple_cmd(input, HOSTNAME);
 
     return result;
 }

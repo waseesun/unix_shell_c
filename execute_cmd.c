@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <string.h>
-#include "redirect.c"
+#include "history.h"
 
 int cmd(char *command, char *args[], const char *HOSTNAME) {
     if (strcmp(command, "hostname") == 0) {
