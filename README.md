@@ -1,5 +1,10 @@
 # UNIX SHELL IN C LANGUAGE
 
+## Created by:
+
+[Wasee Sun](https://github.com/wasee-sun) & [Sahil Iftekhar](https://github.com/sahil-iftekhar)
+
+
 ## 🔧 Basic Features of the UNIX Shell
 
 This shell project implements several core features found in typical Unix-like terminal environments. Below is an overview of its primary functionalities:
