@@ -20,9 +20,6 @@ int seperate_cmd(char **commands, int cmd_count, const char *HOSTNAME) {
         }
 
         result = cmd(tokens[0], tokens, HOSTNAME);
-        if (result == 1) { 
-            return 1;
-        }
     }
     return result;
 }
