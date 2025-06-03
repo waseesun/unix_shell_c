@@ -2,7 +2,7 @@
 
 ## Created by:
 
-[Wasee Sun](https://github.com/wasee-sun) & [Sahil Iftekhar](https://github.com/sahil-iftekhar)
+[Wasee Sun](https://github.com/waseesun) & [Sahil Iftekhar](https://github.com/sahil-iftekhar)
 
 
 ## 🔧 Basic Features of the UNIX Shell
